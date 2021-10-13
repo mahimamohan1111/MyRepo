@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.Stack;
 
 class Node {
 
@@ -84,6 +85,46 @@ class LinkedListSS {
 		}
 		return temp.next;	
 	}
+
+	public boolean isPalindrome(Node A)
+	{
+		boolean isPAlindrome=false;
+		Stack<Integer> stack=new Stack<Integer>();
+
+		if(A==null)
+			return false;
+
+		Node temp=A;
+
+		while(temp!=null)
+		{
+			stack.push(temp.data);
+			temp=temp.next;
+		}
+
+		temp=head;
+
+		while(temp!=null)
+		{
+			if(!stack.isEmpty())
+			{
+
+				int i=stack.pop();
+				if(temp.data==i)
+				{
+					isPAlindrome=true;
+					temp=temp.next;
+				}
+				else
+				{
+					System.out.println("I am at false!");
+					isPAlindrome=false;
+					return isPAlindrome;
+				}
+			}
+		}
+		return isPAlindrome;
+	}
 	public Node SortedMerge(Node A, Node B)
 	{
 
@@ -100,6 +141,13 @@ class LinkedListSS {
 			B.next = SortedMerge(A, B.next);
 			return B;
 		}
+
+	}
+	public void reverseLL(Node head2) {
+		// TODO Auto-generated method stub
+		if(head2==null) return;
+		reverseLL(head2.next);
+		System.out.println(head2.data);
 
 	}
 
@@ -120,8 +168,20 @@ public class LinkedList {
 		LinkedListSS mergeLL=new LinkedListSS();
 		//	ss1.head=mergeLL.MergeLL(ss1.head, ss2.head);
 		//ss1.printList();
-		mergeLL.head=mergeLL.SortedMerge(ss1.head, ss2.head);
-		mergeLL.printList();
+		//mergeLL.head=mergeLL.SortedMerge(ss1.head, ss2.head);
+		//mergeLL.printList();
+
+		LinkedListSS ss3=new LinkedListSS();
+		ss3.insert(12);
+		ss3.insert(4);
+		ss3.insert(3);
+		ss3.insert(9);
+		ss3.insert(4);
+		ss3.insert(12);
+		System.out.println(ss3.isPalindrome(ss3.head));
+		ss3.reverseLL(ss3.head);
+		ss3.printList();
+
 	}
 
 }

@@ -9,7 +9,7 @@ public class FindMostRepeatedWord {
 	public static void main(String args[])
 	{
 		String banned[]= {"hi","hello","what"};
-		String para="Hi, my name is Mahima. What is your name? ";
+		String para="Hi, my name is Mahima. Hi, What is your name? ";
 		FindMostRepeatedWord obj=new FindMostRepeatedWord();
 		obj.findRepeatedWord(para,banned);
 	}
@@ -27,26 +27,35 @@ public class FindMostRepeatedWord {
 		for(int i=0;i<para1.length;i++)
 		{
 			para1[i]=para1[i].toLowerCase();
-			if(wordMap.containsKey(para1[i]))
+			System.out.println(para1[i]);
+			if(!banSet.contains(para1[i]))
 			{
-				int count=wordMap.get(para1[i]);
-				count=count+1;
-				wordMap.put(para1[i], count);
+				if(wordMap.containsKey(para1[i]))
+				{
+					int count=wordMap.get(para1[i]);
+					count=count+1;
+					wordMap.put(para1[i], count);
+				}
+				else
+					wordMap.put(para1[i], 1); // Found it once
 			}
-			else
-				wordMap.put(para1[i], 1); // Found it once
+			else 
+				System.out.println("Heya!"+para1[i]);
 		}
 		int maximum=-1;
 		String repeatedWord=new String();
 		for(int i=0;i<para1.length;i++)
 		{
-			int count=wordMap.get(para1[i]);
-			if(count>maximum)
-			{
-				repeatedWord=para1[i];
-				maximum=count;
+			if(wordMap.containsKey(para1[i]))
+			{	
+				int count=wordMap.get(para1[i]);
+				if(count>maximum)
+				{
+					repeatedWord=para1[i];
+					maximum=count;
+				}
 			}
-				
+
 		}			System.out.println("Repeated word is :" + repeatedWord);
 
 	}
